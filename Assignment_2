@@ -1,0 +1,16 @@
+csv_files <-list.files(path="Data", pattern="*.csv")
+length(csv_files)
+
+#load wingspan_vs_mas.csv
+
+df <- read.csv("./Data/wingspan_vs_mass.csv")
+
+head(df)
+
+for(file in list.files(path="./Data/", pattern="b*", recursive = TRUE)){
+  print(file)
+}
+
+for(file in list.files(path="./Data/", pattern="*.csv", recursive = TRUE)){
+  print(file)
+}
