@@ -1,16 +1,19 @@
+#find all files with .csv extension and find length
 csv_files <-list.files(path="Data", pattern="*.csv")
 length(csv_files)
 
-#load wingspan_vs_mas.csv
-
+#load wingspan_vs_mass.csv
 df <- read.csv("./Data/wingspan_vs_mass.csv")
 
+#write first 5 lines of file
 head(df)
 
+#find all files that start with b in ./Data recursively
 for(file in list.files(path="./Data/", pattern="b*", recursive = TRUE)){
   print(file)
 }
 
+#find all files that end in .csv recursively
 for(file in list.files(path="./Data/", pattern="*.csv", recursive = TRUE)){
   print(file)
 }
