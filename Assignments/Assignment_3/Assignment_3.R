@@ -12,9 +12,8 @@
 # Your task is to write the code that accomplished those tasks.
 
 # Then, make sure to upload this to both Canvas and your GitHub repository
-
-
-
+library(tidyverse)
+library(easystats)
 
 # Vector operations! ####
 
@@ -69,10 +68,74 @@ head(dat)
 
 
 # You can access specific columns of a "data frame" by name using '$'
+#dat$Species is a factor, which is not quite a character. More of an index
 dat$Species
 dat$Sepal.Length
+install.packages("easystats", repos = "https://easystats.r-universe.dev")
+# pipe, just like in bash (Ctrl + Shift + M) %>% 
 
-# You can also use square brackets to get specific 1-D or 2-D subsets of a data frame (rows and/or columns)
+#regression of all three varieties
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) + 
+  geom_point() + geom_smooth()
+
+#Average all Sepal lengths
+iris$Sepal.Length %>% 
+  mean()
+
+#gives us a new data set with only setosa, then finds mean Sepal Length
+setosa <- iris[iris$Species == 'setosa',]
+setosa$Sepal.Length %>% sd()
+
+#Same, but for versicolor
+versicolor <- iris[iris$Species == 'versicolor',]
+versicolor$Sepal.Length %>% sd()
+
+#Same, but for virginica
+virginica <- iris[iris$Species == 'virginica',]
+virginica$Sepal.Length %>% sd()
+
+#gives us a new data set with only setosa, then finds stdev of Sepal Length
+setosa <- iris[iris$Species == 'setosa',]
+setosa$Sepal.Length %>% mean()
+
+#Same, but for versicolor
+versicolor <- iris[iris$Species == 'versicolor',]
+versicolor$Sepal.Length %>% mean()
+
+#Same, but for virginica
+virginica <- iris[iris$Species == 'virginica',]
+virginica$Sepal.Length %>% mean()
+
+#easy way
+iris %>% 
+  group_by(Species) %>% 
+  summarize(Mean_Sep_Length = mean(Sepal.Length), 
+            SDSepLength = sd(Sepal.Length),
+            minSepLength = min(Sepal.Length),
+            maxSepLength = max(Sepal.Length))
+
+#basic statistical summary
+iris$Sepal.Length %>% summary()
+
+#distribution of Sepal.Length for each variation
+iris %>% 
+  ggplot(aes(x=Sepal.Length, color=Species)) +
+  geom_density()
+
+library(palmerpenguins)
+names(penguins)
+summary(penguins)
+table(penguins$species, penguins$island)
+
+library(GGally)
+ggpairs(penguins)
+
+ggplot(penguins, aes(x=body_mass_g, y=flipper_length_mm, color=species)) +
+  geom_point() +
+  geom_smooth()
+
+# You can also use square brackets to get specific 1-D or 2-D subsets of a data 
+#frame (rows and/or columns)
 dat[1,1] # [Rows, Columns]
 dat[1:3,5]
 
