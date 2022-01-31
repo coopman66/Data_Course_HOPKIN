@@ -66,6 +66,13 @@ names(dat)
 dim(dat)
 head(dat)
 
+class(iris)
+iris$Species
+class(dat$Species)
+
+unique(iris$Species)
+
+
 
 # You can access specific columns of a "data frame" by name using '$'
 #dat$Species is a factor, which is not quite a character. More of an index
@@ -84,6 +91,18 @@ iris$Sepal.Length %>%
 
 #gives us a new data set with only setosa, then finds mean Sepal Length
 setosa <- iris[iris$Species == 'setosa',]
+setosa$Sepal.Length %>% mean()
+
+#Same, but for versicolor
+versicolor <- iris[iris$Species == 'versicolor',]
+versicolor$Sepal.Length %>% mean()
+
+#Same, but for virginica
+virginica <- iris[iris$Species == 'virginica',]
+virginica$Sepal.Length %>% mean()
+
+#gives us a new data set with only setosa, then finds stdev of Sepal Length
+setosa <- iris[iris$Species == 'setosa',]
 setosa$Sepal.Length %>% sd()
 
 #Same, but for versicolor
@@ -94,17 +113,7 @@ versicolor$Sepal.Length %>% sd()
 virginica <- iris[iris$Species == 'virginica',]
 virginica$Sepal.Length %>% sd()
 
-#gives us a new data set with only setosa, then finds stdev of Sepal Length
-setosa <- iris[iris$Species == 'setosa',]
-setosa$Sepal.Length %>% mean()
-
-#Same, but for versicolor
-versicolor <- iris[iris$Species == 'versicolor',]
-versicolor$Sepal.Length %>% mean()
-
-#Same, but for virginica
-virginica <- iris[iris$Species == 'virginica',]
-virginica$Sepal.Length %>% mean()
+class(iris) #%>% group_by(Species))
 
 #easy way
 iris %>% 
@@ -142,7 +151,6 @@ dat[1:3,5]
 vector2[1]
 letters[1:7]
 letters[c(1,3,5,7)]
-
 
 # Plotting ####
 
@@ -185,7 +193,7 @@ as.numeric(vector3)
 
 
 #check it out
-plot(nums) 
+plot(nums)
 plot(nums_factor)
 # take note of how numeric vectors and factors behave differently in plot()
 
@@ -215,28 +223,31 @@ dbinom(50,100,.5) # probability of getting exactly 50 heads out of 100 coin flip
 
 
 # YOUR REMAINING HOMEWORK ASSIGNMENT (Fill in with code) ####
-
+data("iris")
 # 1.  Get a subset of the "iris" data frame where it's just even-numbered rows
 
-seq(2,150,2) # here's the code to get a list of the even numbers between 2 and 150
-
+iris_even_rows <- iris[seq(2,150,2),]
+iris_even_rows
 
 
 # 2.  Create a new object called iris_chr which is a copy of iris, except where every column is a character class
-
-
+iris_chr <- iris
+iris_chr[] <- lapply(iris_chr, as.character)
+sapply(iris_chr, class)
 
 # 3.  Create a new numeric vector object named "Sepal.Area" which is the product of Sepal.Length and Sepal.Width
-
+Sepal.Area <- c()
+Sepal.Area <- iris$Sepal.Length * iris$Sepal.Width
 
 
 # 4.  Add Sepal.Area to the iris data frame as a new column
-
-
+Sepal.Area <- as.data.frame(Sepal.Area)
+iris <- cbind(iris, Sepal.Area)
 
 # 5.  Create a new dataframe that is a subset of iris using only rows where Sepal.Area is greater than 20 
       # (name it big_area_iris)
-
+big_area_iris <- iris[iris$Sepal.Area > 20,]
+big_area_iris
 
 
 # 6.  Upload the last numbered section of this R script (with all answers filled in and tasks completed) 
