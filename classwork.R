@@ -66,33 +66,33 @@ library(tidyverse)
 #2/22/22
 #predictor variable is the "Separator" (like species in penguin)
 #response variable is whatever changes (like height based on species)
-library(palmerpenguins)
-mod1 <- glm(data = penguins,
-            formula = bill_length_mm ~ species)
-
-library(modlr)
-library(easystats)
-
-mod1 %>% 
-  summary()
-# Deviance Residuals are the difference b/w predicted and actual
-# Coefficients- Intercept is whatever the first level of the predictor is
-#   other coefficients are whatever the difference from the base (intercept) is
-
-penguins %>% names
-
-mod2 <- glm(data = penguins,
-            formula = bill_length_mm ~ species + island + bill_depth_mm + sex + 
-              year + body_mass_g + flipper_length_mm)
-summary(mod2)
-add_predictions(penguins, mod2)
-
-mod3 <- glm(data = penguins,
-            formula = bill_length_mm ~ species + bill_depth_mm + sex + 
-              body_mass_g + flipper_length_mm)
-# AIC/BIC is essentially simplicity of formula
-# R2 is how much of an improvement there is over just using average
-# RMSE is average error
-performance(mod1)
-performance(mod2)
-performance(mod3)
+# library(palmerpenguins)
+# mod1 <- glm(data = penguins,
+#             formula = bill_length_mm ~ species)
+# 
+# library(modlr)
+# library(easystats)
+# 
+# mod1 %>% 
+#   summary()
+# # Deviance Residuals are the difference b/w predicted and actual
+# # Coefficients- Intercept is whatever the first level of the predictor is
+# #   other coefficients are whatever the difference from the base (intercept) is
+# 
+# penguins %>% names
+# 
+# mod2 <- glm(data = penguins,
+#             formula = bill_length_mm ~ species + island + bill_depth_mm + sex + 
+#               year + body_mass_g + flipper_length_mm)
+# summary(mod2)
+# add_predictions(penguins, mod2)
+# 
+# mod3 <- glm(data = penguins,
+#             formula = bill_length_mm ~ species + bill_depth_mm + sex + 
+#               body_mass_g + flipper_length_mm)
+# # AIC/BIC is essentially simplicity of formula
+# # R2 is how much of an improvement there is over just using average
+# # RMSE is average error
+# performance(mod1)
+# performance(mod2)
+# performance(mod3)
